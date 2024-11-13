@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+    <h1>Example of Using Slug in Django</h1>
+    <p>In Django, slugs are used to create clean, human-readable URLs by converting titles or other fields into lowercase, space-separated words joined by hyphens. This improves the readability of the URL and makes it more user-friendly and SEO-friendly.</p>
+</div>
+<br>
+
+<div class="container list-group">
+    {% if students %}
+        <h3>Example with Slug</h3>
+        <ul class="list-group">
+            {% for student in students %}
+            <li class="list-group-item">
+                <a href="{% url 'details' student.slug %}">{{ student.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h3>Example without Slug</h3>
+        <ul class="list-group">
+            {% for student in students %}
+            <li class="list-group-item">
+                <a href="{% url 'details-without-slug' student.id %}">{{ student.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No students found.</p>
+    {% endif %}
+</div>
+{% endblock %}
